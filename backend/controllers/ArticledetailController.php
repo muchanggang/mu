@@ -3,17 +3,27 @@
 namespace backend\controllers;
 
 use backend\models\Articledetail;
+use yii\data\Pagination;
 
 class ArticledetailController extends \yii\web\Controller
 {
     public function actionArticledetail()
     {
+        //分页
         //1.接收从数据库里面读出来的数据
-        $data=Articledetail::find()->all();
+        $data=Articledetail::find();
+        $page = new Pagination([
+            'totalCount' => $data->count(),
+            'defaultPageSize' => 2,
+            'pageSizeLimit' => [1,5]
+        ]);
+        $users = $data->offset($page->offset)
+            ->limit($page->pageSize)
+            ->all();
         //2.选择要显示的视图页面
-        return $this->render('articledetail',['data'=>$data]);
+        return $this->render('articledetail', ['users' => $users, 'pager' => $page]);
     }
-
+       //添加
     public function actionAdd(){
         $model = new Articledetail();
         //判定请求方式
@@ -67,9 +77,8 @@ class ArticledetailController extends \yii\web\Controller
 
 //删除
 public function actionDelete($id){
-    
-    $model=Articledetail::deleteAll(['id'=>$id]);
+    $model=Articledetail::deleteAll(['id'=>$id]);//根据id删除一条数据
+    //跳转到品牌首页
+    return $this->redirect(['articledetail/articledetail']);
 }
-
-
 }

@@ -13,7 +13,7 @@
         <td>简介</td>
         <td>操作</td>
     </tr>
-    <?php foreach($data as $w):?>
+    <?php foreach($users as $w):?>
     <tr>
         <td><?php echo $w->article_id;?></php></td>
         <td><?php echo $w->content;?></td>
@@ -27,5 +27,10 @@
     </tr>
     <?php endforeach;?>
     <a class="btn btn-success" href="<?= \yii\helpers\Url::to(['articledetail/add']);?>">添加</a>
-
 </table>
+<?=
+\yii\widgets\LinkPager::widget([
+    'pagination' => $pager,
+    'maxButtonCount' => 3,
+    'hideOnSinglePage' => false
+])?>
