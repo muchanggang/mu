@@ -5,18 +5,21 @@ namespace backend\controllers;
 use backend\models\Brand;
 use backend\models\Goods;
 use backend\models\GoodsCategory;
+use common\models\User;
 use flyok666\qiniu\Qiniu;
 use flyok666\uploadifive\UploadAction;
 
 
 use Yii;
+use yii\console\Exception;
 use yii\web\Controller;
 use yii\data\Pagination;
 use SphinxClient;
 use yii\db\Query;
 use yii\widgets\LinkPager;
 
-
+use app\models\UploadForm;
+use yii\web\UploadedFile;
 
 
 class GoodsController extends \yii\web\Controller
@@ -25,12 +28,11 @@ class GoodsController extends \yii\web\Controller
     public function actionIndex()
     {
         //接收数据
-        $modelGet = $_GET;
+        $modelGet=$_GET;
         // 1.接收从数据库里面取出来的数据
-        $datas = Goods::find()->andWhere(['like', 'name', $modelGet])->andWhere(['like', 'market_price', $modelGet])->andWhere(['like', 'sn', $modelGet])->andWhere(['like', 'shop_price', $modelGet])->all();//搜索功能
-        return $this->render('index', ['datas' => $datas]);
-
-    }
+       $datas = Goods::find()->andWhere(['like', 'name', $modelGet])->all();//搜索功能
+        return $this->render('index',['datas' =>$datas]);
+        }
 
 
     //添加
@@ -95,11 +97,11 @@ class GoodsController extends \yii\web\Controller
                 },
                 //END CLOSURE BY TIME
                 'validateOptions' => [
-                    'extensions' => ['jpg', 'png'],
-                    'maxSize' => 1 * 1024 * 1024, //file size
+                   // 'extensions' => ['jpg', 'png'],//设置图片的大小内存
+//                    'maxSize' => 1 * 1024 * 1024, //file size //设置图片的大小文件
                 ],
                 'beforeValidate' => function (UploadAction $action) {
-                    //throw new Exception('test error');
+//                    throw new Exception('test error');
                 },
                 'afterValidate' => function (UploadAction $action) {
                 },
@@ -127,6 +129,7 @@ class GoodsController extends \yii\web\Controller
                 },
             ],
         ];
+
     }
 
     //测试ztree
@@ -176,7 +179,7 @@ class GoodsController extends \yii\web\Controller
         return $this->redirect(['goods/index']);
     }
 
-
+     // 图片显示
     /**
      * @param $id
      * @return string|\yii\web\Response
@@ -187,4 +190,34 @@ class GoodsController extends \yii\web\Controller
         return $this->render('phot', ['model' => $model]);//跳转到显示的页面
 
     }
+
+    //浏览
+    /**
+     * @return string
+     */
+    public function actionBrowse()
+    {
+        $model = new Goods();
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            //判断是添加顶级分类还是子分类
+            if ($model->parent_id) {
+                //添加子分类
+                $parent = GoodsCategory::findOne(['id' => $model->parent_id]);
+
+                \Yii::$app->session->setFlash('success', '添加成功');
+                //跳转到本页
+                return $this->refresh();
+            }
+            return $this->render('browse');
+        }
+    }
+
+    //删除图片
+    public function actionDelete($id){
+        $model=Goods::deleteAll(['id'=>$id]);
+
+    }
+
+
+
 }

@@ -105,6 +105,11 @@ $this->registerJs(new \yii\web\JsExpression(
        zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
        //展开所有节点
        zTreeObj.expandAll(true);
+        //修改功能   根据当前分类的parent_id选中节点
+       var node = zTreeObj.getNodeByParam("id", "{$model->goods_category_id}", null);//根据id获取节点
+       zTreeObj.selectNode(node);
+
+
 JS
 ));
 

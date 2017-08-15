@@ -2,12 +2,17 @@
 ?>
 <h1>商品表</h1>
 <a class="btn btn-info" href="<?= \yii\helpers\Url::to(['goods/add']);?>">添加</a><br/>
-<form action="<?php echo \yii\helpers\Url::to(['goods/index']);?>" method="get"><input type="text" name="name" placeholder="商品名">--<input type="text" name="sn"  placeholder="单号">--<input type="text" name="market_price"  placeholder="$">--<input type="text" name="shop_price"  placeholder="$">
-    <input type="submit" value="搜索">
+<form action="<?php echo \yii\helpers\Url::to(['goods/index']);?> " method="get">
+<input type="text" name="name" placeholder="商品名">
+<input type="submit" value="搜索">
+
+
 </form>
+
+
     <table border="1" style="width:1200px";>
-       <tr>
-           <th>ID</th>
+        <tr>
+            <th>ID</th>
            <th>货号</th>
            <th>商品名称</th>
            <th>商品价格</th>
@@ -27,7 +32,7 @@
 <a class="btn btn-default" href="<?=\yii\helpers\Url::to(['goods/del','id'=>$v->id]);?>">删除</a>
 
 <a class="btn btn-default" href="<?=\yii\helpers\Url::to(['goods/phot','id'=>$v->id]);?>">相片</a>
-
+   <a class="btn btn-default" href="<?=\yii\helpers\Url::to(['goods/browse']);?>">图片浏览</a>
         </td>
         </tr>
     <?php endforeach;?>

@@ -2,6 +2,7 @@
 use yii\web\JsExpression;
 
 $from =\yii\bootstrap\ActiveForm::begin();
+
 echo $from->field($model,'logo')->hiddenInput();
 //外部TAG
 echo \yii\bootstrap\Html::fileInput('test', NULL, ['id' => 'test']);
@@ -40,5 +41,8 @@ EOF
 ]);
 echo \yii\bootstrap\Html::img($model->logo,['id'=>'img']);
 
-
 \yii\bootstrap\ActiveForm::end();
+
+?>
+
+<a class="btn btn-default" href="<?=\yii\helpers\Url::to(['goods/delete','id'=>$v->id]);?>">删除</a>
