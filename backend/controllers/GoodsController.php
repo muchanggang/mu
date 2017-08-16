@@ -25,13 +25,27 @@ use yii\web\UploadedFile;
 class GoodsController extends \yii\web\Controller
 {
     //显示列表
+    /**
+     * @param $rows
+     * @return string
+     */
     public function actionIndex()
     {
-        //接收数据
-        $modelGet=$_GET;
+        $query = Goods::find();
+        if(Yii::$app->request->get('name')){
+            $query->where(['like','name',$query]);
+        }
         // 1.接收从数据库里面取出来的数据
-       $datas = Goods::find()->andWhere(['like', 'name', $modelGet])->all();//搜索功能
-        return $this->render('index',['datas' =>$datas]);
+//       $datas =Goods::find()->all();//搜索功能
+        $page = new Pagination([
+            'totalCount' => $query->count(),
+            'defaultPageSize' => 3,
+            'pageSizeLimit' => [1,5]
+        ]);
+        $users = $query->offset($page->offset)
+            ->limit($page->pageSize)
+            ->all();
+        return $this->render('index',['datas' =>$users,'page'=>$page]);
         }
 
 
@@ -213,9 +227,8 @@ class GoodsController extends \yii\web\Controller
     }
 
     //删除图片
-    public function actionDelete($id){
-        $model=Goods::deleteAll(['id'=>$id]);
-
+    public function actionDelete(){
+        $model=Goods::deleteAll();
     }
 
 

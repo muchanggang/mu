@@ -45,4 +45,4 @@ echo \yii\bootstrap\Html::img($model->logo,['id'=>'img']);
 
 ?>
 
-<a class="btn btn-default" href="<?=\yii\helpers\Url::to(['goods/delete','id'=>$v->id]);?>">删除</a>
+<a class="btn btn-default" href="<?=\yii\helpers\Url::to(['goods/delete']);?>">删除</a>

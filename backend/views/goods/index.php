@@ -5,11 +5,7 @@
 <form action="<?php echo \yii\helpers\Url::to(['goods/index']);?> " method="get">
 <input type="text" name="name" placeholder="商品名">
 <input type="submit" value="搜索">
-
-
 </form>
-
-
     <table border="1" style="width:1200px";>
         <tr>
             <th>ID</th>
@@ -38,3 +34,9 @@
     <?php endforeach;?>
 </table>
 
+<?=
+\yii\widgets\LinkPager::widget([
+    'pagination' => $page,
+    'maxButtonCount' => 3,
+    'hideOnSinglePage' => false
+])?>
