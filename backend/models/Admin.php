@@ -159,10 +159,4 @@ class Admin extends ActiveRecord implements IdentityInterface
         return $authKey === $this->getAuthKey();
         // TODO: Implement validateAuthKey() method.
     }
-
-
-
-
-
-
 }

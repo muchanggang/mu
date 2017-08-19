@@ -66,13 +66,14 @@ class BooksController extends \yii\web\Controller
               var_dump($model->getErrors());exit;
           }
       }
-      //1.2 调用视图，将模型传递到视图
+          //1.2 调用视图，将模型传递到视图
       return $this->render('books_add',['model'=>$model]);
   }
 
     //删除
     public function actionBooks_dele($id){
         $model=Books::deleteAll(['id'=>$id]);
+        return $this->redirect(['books/books']);
 
     }
 

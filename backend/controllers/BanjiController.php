@@ -6,7 +6,7 @@ use backend\models\Banji;
 
 class BanjiController extends \yii\web\Controller
 {
-    //显示
+             //显示
     public function actionBanji()
     {
         //1.接收从数据库里面取出来的值
@@ -15,7 +15,7 @@ class BanjiController extends \yii\web\Controller
         return $this->render('bianjie',['rows'=>$rows]);
     }
 
-    //添加
+             //添加
     public function actionTianjiae(){
         $model = new Banji();
         //判定请求方式
@@ -41,7 +41,7 @@ class BanjiController extends \yii\web\Controller
         return $this->render('tianjie',['model'=>$model]);
     }
 
-    //编辑
+             //编辑
     public function actionXiao($id){
         $model =Banji::findOne(['id'=>$id]);
         //判定请求方式
@@ -63,14 +63,15 @@ class BanjiController extends \yii\web\Controller
                 var_dump($model->getErrors());exit;
             }
         }
-        //1.2 调用视图，将模型传递到视图
+           //1.2 调用视图，将模型传递到视图
         return $this->render('tianjie',['model'=>$model]);
     }
 
-   //删除
+             //删除
     public function actionDelt($id){
         //继承模型
       $model=Banji::deleteAll(['id'=>$id]);//根据ID来删除一条数据
+        return $this->redirect(['banji/banji']);
     }
 
 }

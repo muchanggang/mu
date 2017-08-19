@@ -7,6 +7,7 @@ use backend\models\ArticleCategory;
 
 class ArticleController extends \yii\web\Controller
 {
+    //显示页面
     public function actionArticle()
     {
         //1.接收从数据库里面读出来的数据
@@ -72,6 +73,7 @@ class ArticleController extends \yii\web\Controller
        //.删除
     public function actionDelete($id){
         $model=Article::deleteAll(['id'=>$id]);
+        return $this->redirect(['article/article']);
     }
 
 }

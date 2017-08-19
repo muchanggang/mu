@@ -15,7 +15,7 @@ class StudentController extends \yii\web\Controller
         return $this->render('student', ['model' => $model]);
     }
 
-    //添加页面
+      //添加页面
     public function actionStudent_add()
     {
         $model = new Student();
@@ -45,7 +45,7 @@ class StudentController extends \yii\web\Controller
 
     }
 
-    //修改
+       //修改
     public function actionStudent_delt($id){
         $model =Student::findOne($id);
         //判定请求方式
@@ -74,7 +74,7 @@ class StudentController extends \yii\web\Controller
 
     }
 
-    //.删除
+       //.删除
     public function actionStudent_del($id){
         $model=Student::deleteAll(['id'=>$id]);
     }

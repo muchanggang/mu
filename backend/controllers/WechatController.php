@@ -11,7 +11,6 @@ class WechatController extends \yii\web\Controller
         //显示列表
       $data=Wechat::find()->all();
         return $this->render('index',['data'=>$data]);
-
     }
 
     public function actionAdd(){

@@ -55,23 +55,19 @@ class AdminController extends \yii\web\Controller
             $model->email=$requset->post()['Admin']['email'];
             $model->username=$requset->post()['Admin']['username'];
             $model->password_hash =\Yii::$app->security->generatePasswordHash($requset->post()['Admin']['password_hash']);//加密后的代码
-            //数据验证
-            if($model->validate()){
-                //验证成功，保存数据
-                $model->save();
-                //设置提示信息
-                \yii::$app->session->setFlash('success','添加成功') ;
-                //跳转到首页
-                return $this->redirect(['admin/index']);
+            if($model->validate()){ //数据验证
+                $model->save();//验证成功，保存数据
+                \yii::$app->session->setFlash('success','添加成功') ;//设置提示信息
+                return $this->redirect(['admin/index']); //跳转到首页
             }else{
                 var_dump($model->getErrors());exit;
             }
         }
-        //调用视图，选择要显示的页面
+         //调用视图，选择要显示的页面
         return $this->render('delt',['model'=>$model]);
     }
 
-    //删除用户列表
+       //删除用户列表
     public function actionDelete($id){//接收id
         $model=Admin::deleteAll(['id'=>$id]);//根据id删除一条数据
         //跳转到页面
@@ -129,6 +125,8 @@ class AdminController extends \yii\web\Controller
         return $this->redirect('login');
         //跳转  提示信息
     }
+
+
 
 
 

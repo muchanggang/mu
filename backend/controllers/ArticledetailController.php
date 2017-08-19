@@ -23,7 +23,7 @@ class ArticledetailController extends \yii\web\Controller
         //2.选择要显示的视图页面
         return $this->render('articledetail', ['users' => $users, 'pager' => $page]);
     }
-       //添加
+         //添加
     public function actionAdd(){
         $model = new Articledetail();
         //判定请求方式
@@ -49,7 +49,7 @@ class ArticledetailController extends \yii\web\Controller
         return $this->render('add',['model'=>$model]);
     }
 
-    //修改
+         //修改
     public function actionBooks($id){
         $model =Articledetail::findOne(['id'=>$id]);
         //判定请求方式
@@ -75,7 +75,7 @@ class ArticledetailController extends \yii\web\Controller
         return $this->render('add',['model'=>$model]);
     }
 
-//删除
+         //删除
 public function actionDelete($id){
     $model=Articledetail::deleteAll(['id'=>$id]);//根据id删除一条数据
     //跳转到品牌首页

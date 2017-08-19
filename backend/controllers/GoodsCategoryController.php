@@ -28,26 +28,6 @@ class GoodsCategoryController extends \yii\web\Controller
 
     //添加
     public function actionAdd(){
-//        $model = new GoodsCategory();
-//        if($model->load(\Yii::$app->request->post()) && $model->validate()){
-//            //判断是添加顶级分类还是子分类
-//            if($model->parent_id){
-//                //添加子分类
-//                $parent = GoodsCategory::findOne(['id'=>$model->parent_id]);
-//                //创建子分类
-//                $model->prependTo($parent);
-//            }else{
-//                //添加顶级分类
-//                $model->makeRoot();
-//            }
-//            \Yii::$app->session->setFlash('success','分类添加成功');
-//            //跳转到本页
-//            //return $this->redirect(['add']);
-//            return $this->refresh();
-//        }
-//        return $this->render('add',['model'=>$model]);
-
-
         $model = new GoodsCategory();
         //判定请求方式
         //实例化request组件
@@ -80,15 +60,14 @@ class GoodsCategoryController extends \yii\web\Controller
         return $this->renderPartial('ztree',['models'=>$models]);
     }
 
-    //修改
+       //修改
     public function actionModify($id){
         $model =GoodsCategory::findOne(['id'=>$id]);
         //判定请求方式
         //实例化request组件
         $request = \Yii::$app->request;
         if($request->isPost){
-            //2 接收表单数据，入库
-            //2.1 接收表单数据
+             //2.1 接收表单数据
             $model->load($request->post());
             //2.2 数据验证
             if($model->validate()){

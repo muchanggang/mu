@@ -24,4 +24,5 @@
         </tr>
     <?php endforeach;?>
     <a class="btn btn-default" href="<?=\yii\helpers\Url::to(['admin/add']);?>">添加</a>
+    <a class="btn btn-default" href="<?=\yii\helpers\Url::to(['']);?>">修改用户密码</a>
 </table>

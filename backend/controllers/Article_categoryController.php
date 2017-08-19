@@ -64,16 +64,15 @@ class Article_categoryController extends \yii\web\Controller
                 var_dump($model->getErrors());exit;
                 }
           }
-                  //1.2 调用视图，将模型传递到视图
+                //1.2 调用视图，将模型传递到视图
             return $this->render('article_add',['model'=>$model]);
         }
 
     //删除文章分类管理
     public function actionArticle_delete($id){
-        //删除功能
             $model = ArticleCategory::findOne($id);//获取ID删除一条数
             $model->status = -1;
             $model->save();//保存数据
-        return $this->redirect(\yii\helpers\Url::to(['article_category/article']));
+     return $this->redirect(\yii\helpers\Url::to(['article_category/article']));
            }
 }

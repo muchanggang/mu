@@ -42,12 +42,6 @@ class BrandController extends Controller
            // $model->imgFile = UploadedFile::getInstance($model,'imgFile');
             //2.2 数据验证
             if($model->validate()){
-                //2.3 验证成功，保存到数据库
-                //保存上传文件
-//                $fileName = '/upload/'.uniqid().'.'.$model->imgFile->extension;
-//                if($model->imgFile->saveAs(\Yii::getAlias('@webroot').$fileName,false)){
-//                    $model->logo = $fileName;
-//               }
                 $model->save();
                 //设置提示信息
                 \Yii::$app->session->setFlash('success','添加成功');
@@ -109,7 +103,7 @@ class BrandController extends Controller
    return $this->redirect(\yii\helpers\Url::to(['brand/index']));
     }
 
-    //图片
+        //图片
     public function actions(){
         return [
             's-upload' => [
@@ -171,9 +165,5 @@ class BrandController extends Controller
             ],
         ];
     }
-
-
-
-
 
 }

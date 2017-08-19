@@ -154,7 +154,7 @@ class GoodsController extends \yii\web\Controller
     }
 
 
-// 修改
+    // 修改
     public function actionDtle($id)
     {
         $model = Goods::findOne(['id' => $id]);
@@ -185,7 +185,7 @@ class GoodsController extends \yii\web\Controller
     }
 
 
-    //删除
+     //删除
     public function actionDel($id)
     {
         $model = Goods::deleteAll(['id' => $id]);
